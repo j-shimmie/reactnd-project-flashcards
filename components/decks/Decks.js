@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import S from './Decks.styled'
 import { getDecks } from '../../utils/api'
 import { fetchDecks } from '../../actions'
+import DeckCard from '../deck-card/DeckCard'
 
 const Decks = ({ decks, onFetchDecks }) => {
   useEffect(() => {
@@ -13,7 +14,9 @@ const Decks = ({ decks, onFetchDecks }) => {
 
   return (
     <S.Decks>
-      <Text>{JSON.stringify(decks)}</Text>
+      {Object.keys(decks).map((deck) => (
+        <DeckCard key={deck} title={deck} />
+      ))}
     </S.Decks>
   )
 }
