@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Text } from 'react-native'
+import { FlatList } from 'react-native'
 import { connect } from 'react-redux'
 
 import S from './Decks.styled'
@@ -7,16 +7,27 @@ import { getDecks } from '../../utils/api'
 import { fetchDecks } from '../../actions'
 import DeckCard from '../deck-card/DeckCard'
 
+const renderItem = ({ item }) => <DeckCard title={item.key} />
+
 const Decks = ({ decks, onFetchDecks }) => {
   useEffect(() => {
     getDecks().then((decks) => onFetchDecks(decks))
   }, [])
 
+  const decksWithKey = Object.keys(decks).map((deck) => ({
+    key: deck,
+  }))
+
   return (
     <S.Decks>
-      {Object.keys(decks).map((deck) => (
-        <DeckCard key={deck} title={deck} />
-      ))}
+      <FlatList
+        data={decksWithKey}
+        renderItem={renderItem}
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'center',
+        }}
+      />
     </S.Decks>
   )
 }

@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Text } from 'react-native'
 
 import S from './DeckCard.styled'
 
 const DeckCard = ({ title, questNum }) => {
   return (
     <S.DeckCard>
-      <Text>{title}</Text>
-      <Text>{questNum && `${questNum} cards`}</Text>
+      <S.Title>{title}</S.Title>
+      <S.Subtitle>{questNum && `${questNum} cards`}</S.Subtitle>
     </S.DeckCard>
   )
 }
