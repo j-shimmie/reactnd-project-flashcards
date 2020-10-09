@@ -1,19 +1,29 @@
 import React, { useEffect } from 'react'
 import { Text } from 'react-native'
+import { connect } from 'react-redux'
 
 import S from './Decks.styled'
 import { getDecks } from '../../utils/api'
+import { fetchDecks } from '../../actions'
 
-const Decks = () => {
+const Decks = ({ decks, onFetchDecks }) => {
   useEffect(() => {
-    getDecks().then((decks) => console.log(decks))
+    getDecks().then((decks) => onFetchDecks(decks))
   }, [])
 
   return (
     <S.Decks>
-      <Text>Test</Text>
+      <Text>{JSON.stringify(decks)}</Text>
     </S.Decks>
   )
 }
 
-export default Decks
+const mapStateToProps = (decks) => ({
+  decks,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  onFetchDecks: (decks) => dispatch(fetchDecks(decks)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Decks)
