@@ -1,15 +1,7 @@
-import { FETCH_DECKS } from '../actions'
+import { combineReducers } from 'redux'
 
-const decks = (state = {}, action) => {
-  switch (action.type) {
-    case FETCH_DECKS:
-      return {
-        ...state,
-        ...action.decks,
-      }
-    default:
-      return state
-  }
-}
+import decks from './decks'
 
-export default decks
+export default combineReducers({
+  decks,
+})

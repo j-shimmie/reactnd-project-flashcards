@@ -17,7 +17,7 @@ DeckCard.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (decks, { title }) => {
+const mapStateToProps = ({ decks }, { title }) => {
   const deck = decks[title]
   const questNum = deck ? deck.questions.length : null
 

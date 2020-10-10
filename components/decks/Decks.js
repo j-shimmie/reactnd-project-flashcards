@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import S from './Decks.styled'
 import { getDecks } from '../../utils/api'
-import { fetchDecks } from '../../actions'
+import { fetchDecks } from '../../actions/decks'
 import DeckCard from '../deck-card/DeckCard'
 
 const renderItem = ({ item }) => <DeckCard title={item.key} />
@@ -32,7 +32,7 @@ const Decks = ({ decks, onFetchDecks }) => {
   )
 }
 
-const mapStateToProps = (decks) => ({
+const mapStateToProps = ({ decks }) => ({
   decks,
 })
 
