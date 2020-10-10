@@ -9,7 +9,7 @@ import CTA from '../cta/CTA'
 const DeckDetail = ({ title }) => {
   return (
     <S.DeckDetail>
-      <DeckCard title={title} />
+      <DeckCard title={title} style={{ flex: 2 }} />
       <View>
         <CTA text="Add Card" buttonType="outline" onPress={() => {}} />
         <CTA text="Start Quiz" onPress={() => {}} />

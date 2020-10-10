@@ -7,7 +7,7 @@ const S = {}
 S.InputText = styled.TextInput`
   background-color: ${white};
   border-radius: 18px;
-  padding: 20px 24px;
+  padding: 24px;
   font-size: 20px;
   shadow-color: ${shadowBlue};
   shadow-offset: 0px 2px;

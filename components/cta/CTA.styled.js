@@ -4,6 +4,8 @@ import {
   white,
   softBlue,
   dangerRed,
+  successGreen,
+  errorRed,
   altoGray,
   slateGray,
 } from '../../utils/colors'
@@ -36,6 +38,16 @@ const buttonTypes = ({ buttonType, disabled }) => {
         shadow-opacity: 0.04;
         shadow-radius: 6;
       `
+    case 'success':
+      return css`
+        background-color: ${successGreen};
+        border: solid 1px ${successGreen};
+      `
+    case 'error':
+      return css`
+        background-color: ${errorRed};
+        border: solid 1px ${errorRed};
+      `
     default:
       return
   }
@@ -46,6 +58,7 @@ const buttonText = ({ buttonType, disabled }) => {
     case 'solid':
       return css`
         color: ${white};
+        font-size: 20px;
 
         ${disabled &&
         css`
@@ -55,11 +68,29 @@ const buttonText = ({ buttonType, disabled }) => {
     case 'outline':
       return css`
         color: ${softBlue};
+        font-size: 20px;
       `
     case 'danger':
       return css`
         color: ${dangerRed};
+        font-size: 20px;
         font-weight: 500;
+      `
+    case 'minimal':
+      return css`
+        color: ${softBlue};
+        font-size: 16px;
+        font-weight: 500;
+      `
+    case 'success':
+      return css`
+        color: ${white};
+        font-size: 20px;
+      `
+    case 'error':
+      return css`
+        color: ${white};
+        font-size: 20px;
       `
     default:
       return
@@ -68,16 +99,15 @@ const buttonText = ({ buttonType, disabled }) => {
 
 S.CTA = styled.TouchableOpacity`
   ${buttonTypes};
-  padding: 24px;
+  padding: 18px 24px;
   border-radius: 13px;
   margin-top: 4px;
   margin-bottom: 4px;
+  align-items: center;
 `
 
 S.Text = styled.Text`
   ${buttonText};
-  font-size: 20px;
-  text-align: center;
 `
 
 export default S

@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 
 import S from './DeckCard.styled'
 
-const DeckCard = ({ title, questNum }) => {
+const DeckCard = ({ title, questNum, style }) => {
   return (
-    <S.DeckCard>
+    <S.DeckCard style={style}>
       <S.Title>{title}</S.Title>
       <S.Subtitle>{questNum && `${questNum} cards`}</S.Subtitle>
     </S.DeckCard>
@@ -15,6 +15,11 @@ const DeckCard = ({ title, questNum }) => {
 
 DeckCard.propTypes = {
   title: PropTypes.string.isRequired,
+  style: PropTypes.object,
+}
+
+DeckCard.defaultProps = {
+  style: {},
 }
 
 const mapStateToProps = ({ decks }, { title }) => {
