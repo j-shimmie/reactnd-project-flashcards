@@ -1,10 +1,16 @@
 import styled, { css } from '@emotion/native'
 
-import { white, softBlue, dangerRed } from '../../utils/colors'
+import {
+  white,
+  softBlue,
+  dangerRed,
+  altoGray,
+  slateGray,
+} from '../../utils/colors'
 
 const S = {}
 
-const buttonTypes = ({ buttonType }) => {
+const buttonTypes = ({ buttonType, disabled }) => {
   switch (buttonType) {
     case 'solid':
       return css`
@@ -14,6 +20,12 @@ const buttonTypes = ({ buttonType }) => {
         shadow-offset: 0px 2px;
         shadow-opacity: 0.04;
         shadow-radius: 6;
+
+        ${disabled &&
+        css`
+          background-color: ${altoGray};
+          border-color: ${altoGray};
+        `};
       `
     case 'outline':
       return css`
@@ -29,11 +41,16 @@ const buttonTypes = ({ buttonType }) => {
   }
 }
 
-const buttonText = ({ buttonType }) => {
+const buttonText = ({ buttonType, disabled }) => {
   switch (buttonType) {
     case 'solid':
       return css`
         color: ${white};
+
+        ${disabled &&
+        css`
+          color: ${slateGray};
+        `};
       `
     case 'outline':
       return css`

@@ -43,7 +43,11 @@ const AddCard = () => {
         </View>
 
         <View>
-          <CTA text="Submit" onPress={handleSubmit} />
+          <CTA
+            text="Submit"
+            onPress={handleSubmit}
+            disabled={questionText === '' || answerText === ''}
+          />
         </View>
       </S.AddCard>
     </DismissKeyboard>
