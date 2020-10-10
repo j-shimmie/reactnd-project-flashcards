@@ -11,9 +11,9 @@ const DeckDetail = ({ title }) => {
     <S.DeckDetail>
       <DeckCard title={title} />
       <View>
-        <CTA text="Add Card" buttonType="outline" />
-        <CTA text="Start Quiz" buttonType="solid" />
-        <CTA text="Delete Deck" buttonType="danger" />
+        <CTA text="Add Card" buttonType="outline" onPress={() => {}} />
+        <CTA text="Start Quiz" onPress={() => {}} />
+        <CTA text="Delete Deck" buttonType="danger" onPress={() => {}} />
       </View>
     </S.DeckDetail>
   )

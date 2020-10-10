@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import S from './CTA.styled'
 
-const CTA = ({ text, buttonType }) => {
+const CTA = ({ text, buttonType, onPress }) => {
   return (
-    <S.CTA buttonType={buttonType}>
+    <S.CTA buttonType={buttonType} onPress={onPress}>
       <S.Text buttonType={buttonType}>{text}</S.Text>
     </S.CTA>
   )
@@ -14,6 +14,7 @@ const CTA = ({ text, buttonType }) => {
 CTA.propTypes = {
   text: PropTypes.string.isRequired,
   buttonType: PropTypes.string,
+  onPress: PropTypes.func.isRequired,
 }
 
 CTA.defaultProps = {
