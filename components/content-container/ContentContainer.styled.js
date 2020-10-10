@@ -1,11 +1,8 @@
-import styled from '@emotion/native'
+import { css } from '@emotion/native'
 
-const S = {}
-
-S.ContentContainer = styled.View`
+const ContentContainer = css`
   flex: 1;
-  padding-top: 48px;
-  padding-bottom: 40px;
+  padding: 48px 28px 40px;
 `
 
-export default S
+export default ContentContainer

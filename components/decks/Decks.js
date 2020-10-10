@@ -24,8 +24,10 @@ const Decks = ({ decks, onFetchDecks }) => {
         data={decksWithKey}
         renderItem={renderItem}
         contentContainerStyle={{
-          flex: 1,
-          justifyContent: 'center',
+          paddingTop: 48,
+          paddingBottom: 40,
+          marginLeft: 28,
+          marginRight: 28,
         }}
       />
     </S.Decks>

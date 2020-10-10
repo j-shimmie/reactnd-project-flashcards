@@ -1,15 +1,12 @@
 import styled from '@emotion/native'
 
+import ContentContainer from '../content-container/ContentContainer.styled'
+
 const S = {}
 
 S.DeckDetail = styled.View`
-  flex: 1;
+  ${ContentContainer};
   justify-content: space-between;
-`
-
-S.Buttons = styled.View`
-  margin-left: 28px;
-  margin-right: 28px;
 `
 
 export default S

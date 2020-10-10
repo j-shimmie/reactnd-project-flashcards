@@ -10,11 +10,12 @@ S.DeckCard = styled.View`
   background-color: ${white};
   border-radius: 18px;
   padding: 36px 20px;
-  margin: 10px 28px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   shadow-color: ${shadowBlue};
   shadow-offset: 0px 2px;
-  shadow-opacity: 0.05;
-  shadow-radius: 18;
+  shadow-opacity: 0.04;
+  shadow-radius: 6;
 `
 
 S.Title = styled.Text`
