@@ -7,8 +7,6 @@ import { getDecks } from '../../utils/api'
 import { fetchDecks } from '../../actions/decks'
 import DeckCard from '../deck-card/DeckCard'
 
-const renderItem = ({ item }) => <DeckCard title={item.key} />
-
 const Decks = ({ decks, onFetchDecks }) => {
   useEffect(() => {
     getDecks().then((decks) => onFetchDecks(decks))
@@ -17,6 +15,8 @@ const Decks = ({ decks, onFetchDecks }) => {
   const decksWithKey = Object.keys(decks).map((deck) => ({
     key: deck,
   }))
+
+  const renderItem = ({ item }) => <DeckCard title={item.key} />
 
   return (
     <S.Decks>
