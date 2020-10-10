@@ -31,4 +31,17 @@ S.Buttons = styled.View`
   justify-content: flex-end;
 `
 
+S.NoQuiz = styled.View`
+  ${ContentContainer};
+  justify-content: center;
+  align-items: center;
+`
+
+S.NoQuizText = styled.Text`
+  font-size: 21px;
+  line-height: 26px;
+  text-align: center;
+  color: ${slateGray};
+`
+
 export default S

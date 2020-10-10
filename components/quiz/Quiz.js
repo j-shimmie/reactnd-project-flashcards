@@ -1,12 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import S from './Quiz.styled'
 import QuizCard from '../quiz-card/QuizCard'
 import CTA from '../cta/CTA'
 
-import S from './Quiz.styled'
-
 const Quiz = ({ questions, questNum }) => {
+  if (questions.length === 0) {
+    return (
+      <S.NoQuiz>
+        <S.NoQuizText>
+          Sorry, you cannot take a quiz because there are no cards in the deck.
+        </S.NoQuizText>
+      </S.NoQuiz>
+    )
+  }
+
+  // TODO: get quiz questions
   const question = questions[0]
 
   return (
