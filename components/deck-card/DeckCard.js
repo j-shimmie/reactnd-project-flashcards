@@ -8,7 +8,9 @@ const DeckCard = ({ title, questNum, style }) => {
   return (
     <S.DeckCard style={style}>
       <S.Title>{title}</S.Title>
-      <S.Subtitle>{questNum && `${questNum} cards`}</S.Subtitle>
+      <S.Subtitle>
+        {questNum && `${questNum} card${questNum > 1 ? 's' : ''}`}
+      </S.Subtitle>
     </S.DeckCard>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import S from './Decks.styled'
@@ -7,7 +7,7 @@ import { getDecks } from '../../utils/api'
 import { fetchDecks } from '../../actions/decks'
 import DeckCard from '../deck-card/DeckCard'
 
-const Decks = ({ decks, onFetchDecks }) => {
+const Decks = ({ decks, onFetchDecks, navigation: { navigate } }) => {
   useEffect(() => {
     getDecks().then((decks) => onFetchDecks(decks))
   }, [])
@@ -16,7 +16,17 @@ const Decks = ({ decks, onFetchDecks }) => {
     key: deck,
   }))
 
-  const renderItem = ({ item }) => <DeckCard title={item.key} />
+  const renderItem = ({ item }) => {
+    const handleItemPress = () => {
+      navigate('Deck Detail', { title: item.key })
+    }
+
+    return (
+      <TouchableOpacity onPress={handleItemPress}>
+        <DeckCard title={item.key} />
+      </TouchableOpacity>
+    )
+  }
 
   return (
     <S.Decks>

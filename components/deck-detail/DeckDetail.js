@@ -19,9 +19,8 @@ const DeckDetail = ({ title }) => {
   )
 }
 
-const mapStateToProps = ({ decks }) => {
-  // TODO: use route params
-  const title = 'React'
+const mapStateToProps = (state, { route }) => {
+  const { title } = route.params
 
   return {
     title,

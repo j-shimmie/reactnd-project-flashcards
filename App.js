@@ -1,21 +1,24 @@
 import React from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { NavigationContainer } from '@react-navigation/native'
 
 import reducers from './reducers'
 import S from './App.styled'
-import Decks from './components/decks/Decks'
-import DeckDetail from './components/deck-detail/DeckDetail'
-import AddCard from './components/add-card/AddCard'
+import Navigator from './components/Navigator'
 
 const store = createStore(reducers)
 
-export default function App() {
+const App = () => {
   return (
-    <Provider store={store}>
-      <S.App>
-        <AddCard />
-      </S.App>
-    </Provider>
+    <NavigationContainer>
+      <Provider store={store}>
+        <S.App>
+          <Navigator />
+        </S.App>
+      </Provider>
+    </NavigationContainer>
   )
 }
+
+export default App
