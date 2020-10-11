@@ -5,10 +5,17 @@ import { View } from 'react-native'
 import S from './DeckDetail.styled'
 import DeckCard from '../deck-card/DeckCard'
 import CTA from '../cta/CTA'
+import { removeDeck } from '../../utils/api'
+import { deleteDeck } from '../../actions/decks'
 
-const DeckDetail = ({ title, navigation: { navigate } }) => {
+const DeckDetail = ({ title, remove, navigation: { navigate } }) => {
   const handleAddPress = () => navigate('Add Card', { title })
   const handleQuizPress = () => navigate('Quiz')
+  const handleDelete = () => {
+    remove(title)
+    removeDeck(title)
+    navigate('Home')
+  }
 
   return (
     <S.DeckDetail>
@@ -16,7 +23,7 @@ const DeckDetail = ({ title, navigation: { navigate } }) => {
       <View>
         <CTA text="Add Card" buttonType="outline" onPress={handleAddPress} />
         <CTA text="Start Quiz" onPress={handleQuizPress} />
-        <CTA text="Delete Deck" buttonType="danger" onPress={() => {}} />
+        <CTA text="Delete Deck" buttonType="danger" onPress={handleDelete} />
       </View>
     </S.DeckDetail>
   )
@@ -30,4 +37,8 @@ const mapStateToProps = (state, { route }) => {
   }
 }
 
-export default connect(mapStateToProps)(DeckDetail)
+const mapDispatchToProps = (dispatch) => ({
+  remove: (title) => dispatch(deleteDeck(title)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail)

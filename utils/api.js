@@ -13,6 +13,7 @@ export const saveDeckTitle = (title) =>
       [formatTitleKey(title)]: {
         title,
         questions: [],
+        timestamp: Date.now(),
       },
     })
   )
@@ -34,4 +35,12 @@ export const addCardToDeck = (title, card) =>
     }
 
     AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(newData))
+  })
+
+export const removeDeck = (title) =>
+  AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
+    const data = JSON.parse(results)
+    const key = formatTitleKey(title)
+    delete data[key]
+    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
   })
