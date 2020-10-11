@@ -6,6 +6,7 @@ import S from './Decks.styled'
 import { getDecks } from '../../utils/api'
 import { fetchDecks } from '../../actions/decks'
 import DeckCard from '../deck-card/DeckCard'
+import CTA from '../cta/CTA'
 
 const Decks = ({ decks, onFetchDecks, navigation: { navigate } }) => {
   useEffect(() => {
@@ -27,6 +28,17 @@ const Decks = ({ decks, onFetchDecks, navigation: { navigate } }) => {
       <TouchableOpacity onPress={handleItemPress}>
         <DeckCard title={item.key} />
       </TouchableOpacity>
+    )
+  }
+
+  if (Object.keys(decks).length === 0) {
+    const handleButtonPress = () => navigate('Add Deck')
+
+    return (
+      <S.NoDecks>
+        <S.InfoText>No decks available to study</S.InfoText>
+        <CTA text="Create New Deck" onPress={handleButtonPress} />
+      </S.NoDecks>
     )
   }
 
