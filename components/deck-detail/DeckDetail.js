@@ -7,7 +7,7 @@ import DeckCard from '../deck-card/DeckCard'
 import CTA from '../cta/CTA'
 
 const DeckDetail = ({ title, navigation: { navigate } }) => {
-  const handleAddPress = () => navigate('Add Card')
+  const handleAddPress = () => navigate('Add Card', { title })
   const handleQuizPress = () => navigate('Quiz')
 
   return (

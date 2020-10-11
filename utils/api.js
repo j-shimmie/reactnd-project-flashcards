@@ -16,3 +16,22 @@ export const saveDeckTitle = (title) =>
       },
     })
   )
+
+export const addCardToDeck = (title, card) =>
+  AsyncStorage.getItem(DECK_STORAGE_KEY).then((results) => {
+    const data = JSON.parse(results)
+    const key = formatTitleKey(title)
+    const obj = data[key]
+
+    const newObj = {
+      ...obj,
+      questions: [...obj.questions, card],
+    }
+
+    const newData = {
+      ...data,
+      [key]: { ...newObj },
+    }
+
+    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(newData))
+  })

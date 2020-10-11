@@ -1,29 +1,31 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
 import S from './AddCard.styled'
 import DismissKeyboard from '../input-text/DismissKeyboard'
 import InputText from '../input-text/InputText'
 import CTA from '../cta/CTA'
+import { addCard } from '../../actions/cards'
+import { addCardToDeck } from '../../utils/api'
 
-const AddCard = () => {
+const AddCard = ({ addNewCard, navToDeck, route }) => {
   const [questionText, setQuestionText] = useState('')
   const [answerText, setAnswerText] = useState('')
 
   const handleSubmit = () => {
-    const cardInfo = {
+    const { title } = route.params
+
+    const card = {
       question: questionText,
       answer: answerText,
     }
 
-    // TODO: dispatch action
-
-    // TODO: Add to database
-
+    addNewCard(title, card)
+    addCardToDeck(title, card)
     setQuestionText('')
     setAnswerText('')
-
-    // TODO: navigate to deck
+    navToDeck(title)
   }
 
   return (
@@ -54,4 +56,9 @@ const AddCard = () => {
   )
 }
 
-export default AddCard
+const mapDispatchToProps = (dispatch, { navigation: { navigate } }) => ({
+  addNewCard: (title, card) => dispatch(addCard(title, card)),
+  navToDeck: (title) => navigate('Deck Detail', { title }),
+})
+
+export default connect(null, mapDispatchToProps)(AddCard)
