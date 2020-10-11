@@ -12,9 +12,11 @@ const Decks = ({ decks, onFetchDecks, navigation: { navigate } }) => {
     getDecks().then((decks) => onFetchDecks(decks))
   }, [])
 
-  const decksWithKey = Object.keys(decks).map((deck) => ({
-    key: deck,
-  }))
+  const decksWithKey = Object.keys(decks)
+    .sort((a, b) => decks[a].timestamp - decks[b].timestamp)
+    .map((deck) => ({
+      key: deck,
+    }))
 
   const renderItem = ({ item }) => {
     const handleItemPress = () => {

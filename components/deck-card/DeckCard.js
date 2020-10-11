@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import S from './DeckCard.styled'
+import { formatTitleKey } from '../../utils/helpers'
 
-const DeckCard = ({ title, questNum, style }) => {
+const DeckCard = ({ deckTitle, questNum, style }) => {
   return (
     <S.DeckCard style={style}>
-      <S.Title>{title}</S.Title>
+      <S.Title>{deckTitle}</S.Title>
       <S.Subtitle>
-        {questNum && `${questNum} card${questNum > 1 ? 's' : ''}`}
+        {questNum !== null && `${questNum} card${questNum !== 1 ? 's' : ''}`}
       </S.Subtitle>
     </S.DeckCard>
   )
@@ -25,11 +26,13 @@ DeckCard.defaultProps = {
 }
 
 const mapStateToProps = ({ decks }, { title }) => {
-  const deck = decks[title]
+  const key = formatTitleKey(title)
+  const deck = decks[key]
   const questNum = deck ? deck.questions.length : null
+  const deckTitle = deck ? deck.title : ''
 
   return {
-    decks,
+    deckTitle,
     questNum,
   }
 }

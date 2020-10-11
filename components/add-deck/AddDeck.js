@@ -1,29 +1,26 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
 import S from './AddDeck.styled'
 import DismissKeyboard from '../input-text/DismissKeyboard'
 import InputText from '../input-text/InputText'
 import CTA from '../cta/CTA'
+import { addDeck } from '../../actions/decks'
+import { saveDeckTitle } from '../../utils/api'
 
-const AddDeck = () => {
+import { getDecks } from '../../utils/api'
+
+const AddDeck = ({ addNewDeck, navToDeck }) => {
   const [deckTitle, setDeckTitle] = useState('')
 
   const handleSubmit = () => {
-    const deckInfo = {
-      [deckTitle.replace(/\s+/g, '')]: {
-        title: deckTitle,
-        questions: [],
-      },
-    }
-
-    // TODO: dispatch action
-
-    // TODO: Add to database
-
+    addNewDeck(deckTitle)
+    saveDeckTitle(deckTitle)
     setDeckTitle('')
+    navToDeck(deckTitle)
 
-    // TODO: navigate to deck
+    getDecks()
   }
 
   return (
@@ -50,4 +47,9 @@ const AddDeck = () => {
   )
 }
 
-export default AddDeck
+const mapDispatchToProps = (dispatch, { navigation: { navigate } }) => ({
+  addNewDeck: (title) => dispatch(addDeck(title)),
+  navToDeck: (title) => navigate('Deck Detail', { title }),
+})
+
+export default connect(null, mapDispatchToProps)(AddDeck)

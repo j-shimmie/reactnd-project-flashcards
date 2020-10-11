@@ -1,4 +1,5 @@
-import { FETCH_DECKS } from '../actions/decks'
+import { FETCH_DECKS, ADD_DECK } from '../actions/decks'
+import { formatTitleKey } from '../utils/helpers'
 
 const decks = (state = {}, action) => {
   switch (action.type) {
@@ -6,6 +7,17 @@ const decks = (state = {}, action) => {
       return {
         ...state,
         ...action.decks,
+      }
+    case ADD_DECK:
+      const { title } = action
+
+      return {
+        ...state,
+        [formatTitleKey(title)]: {
+          title,
+          questions: [],
+          timestamp: Date.now(),
+        },
       }
     default:
       return state

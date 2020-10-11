@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native'
 
 export const DECK_STORAGE_KEY = 'Flashcards:deck'
 
-export const setInitialData = () => {
+const initialData = () => {
   const data = {
     React: {
       title: 'React',
@@ -16,6 +16,7 @@ export const setInitialData = () => {
           answer: 'The componentDidMount lifecycle event',
         },
       ],
+      timestamp: 1602357699,
     },
     JavaScript: {
       title: 'JavaScript',
@@ -26,6 +27,7 @@ export const setInitialData = () => {
             'The combination of a function and the lexical environment within which that function was declared.',
         },
       ],
+      timestamp: 1602357759,
     },
   }
 
@@ -33,3 +35,6 @@ export const setInitialData = () => {
 
   return data
 }
+
+export const setData = (results) =>
+  results === null ? initialData() : JSON.parse(results)
