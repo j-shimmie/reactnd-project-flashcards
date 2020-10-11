@@ -36,7 +36,7 @@ const PercentCircle = ({ percent }) => {
   }
 
   return (
-    <Svg viewBox="0 0 120 120">
+    <Svg width="100%" height="100%" viewBox="0 0 120 120">
       <Circle
         cx={cx}
         cy={cy}
