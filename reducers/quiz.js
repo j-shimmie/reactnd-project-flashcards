@@ -1,9 +1,23 @@
-import { SET_COMPLETE } from '../actions/quiz'
+import { SET_COMPLETE, SET_ID, SET_CORRECT, VIEW_ANSWER } from '../actions/quiz'
 
-const quiz = (state = false, action) => {
+const quiz = (state = {}, action) => {
   switch (action.type) {
-    case SET_COMPLETE:
-      return action.isComplete
+    case SET_COMPLETE: {
+      const { isComplete } = action
+      return { ...state, isComplete }
+    }
+    case SET_ID: {
+      const { id } = action
+      return { ...state, id }
+    }
+    case SET_CORRECT: {
+      const { numCorrect } = action
+      return { ...state, numCorrect }
+    }
+    case VIEW_ANSWER: {
+      const { viewAns } = action
+      return { ...state, viewAns }
+    }
     default:
       return state
   }

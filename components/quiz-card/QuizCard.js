@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import S from './QuizCard.styled'
 import CTA from '../cta/CTA'
+import { viewAnswer } from '../../actions/quiz'
 
-const QuizCard = ({ question }) => {
+const QuizCard = ({ question, viewAns, onViewAnswer }) => {
   const { question: que, answer: ans } = question
-  const [viewAns, setViewAns] = useState(false)
 
-  const handlePress = () => setViewAns(!viewAns)
+  const handlePress = () => onViewAnswer(!viewAns)
 
   return (
     <S.QuizCard>
@@ -34,4 +35,12 @@ QuizCard.propTypes = {
   }).isRequired,
 }
 
-export default QuizCard
+const mapStateToProps = ({ quiz }) => ({
+  viewAns: quiz.viewAns,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  onViewAnswer: (bool) => dispatch(viewAnswer(bool)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizCard)

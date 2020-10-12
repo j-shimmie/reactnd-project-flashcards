@@ -10,7 +10,7 @@ import { deleteDeck } from '../../actions/decks'
 
 const DeckDetail = ({ title, remove, navigation: { navigate } }) => {
   const handleAddPress = () => navigate('Add Card', { title })
-  const handleQuizPress = () => navigate('Quiz')
+  const handleQuizPress = () => navigate('Quiz', { title })
   const handleDelete = () => {
     remove(title)
     removeDeck(title)

@@ -7,6 +7,7 @@ import DeckDetail from './deck-detail/DeckDetail'
 import AddCard from './add-card/AddCard'
 import AddDeck from './add-deck/AddDeck'
 import Quiz from './quiz/Quiz'
+import QuizScore from './quiz-score/QuizScore'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -31,6 +32,7 @@ const Navigation = () => {
       <Screen name="Deck Detail" component={DeckDetail} />
       <Screen name="Add Card" component={AddCard} />
       <Screen name="Quiz" component={Quiz} />
+      <Screen name="Quiz Score" component={QuizScore} />
     </Navigator>
   )
 }

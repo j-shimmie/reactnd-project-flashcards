@@ -1,10 +1,12 @@
 import styled from '@emotion/native'
 
+import ContentContainer from '../content-container/ContentContainer.styled'
 import { textGray, slateGray } from '../../utils/colors'
 
 const S = {}
 
 S.QuizScore = styled.View`
+  ${ContentContainer};
   flex: 1;
   justify-content: center;
 `

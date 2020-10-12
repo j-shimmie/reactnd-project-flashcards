@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import S from './Quiz.styled'
 import QuizCard from '../quiz-card/QuizCard'
 import CTA from '../cta/CTA'
+import { formatTitleKey } from '../../utils/helpers'
+import { setComplete, setId, setCorrect, viewAnswer } from '../../actions/quiz'
 
-const Quiz = ({ questions, questNum }) => {
+const Quiz = ({
+  deck,
+  quiz,
+  onQuizComplete,
+  updateQuestionId,
+  onCorrectAns,
+  onViewAnswer,
+  navigation: { navigate },
+}) => {
+  const { titleKey, questions, questNum } = deck
+  const { id, numCorrect } = quiz
+
+  useEffect(() => {
+    updateQuestionId(0)
+    onCorrectAns(0)
+    onViewAnswer(false)
+  }, [])
+
   if (questions.length === 0) {
     return (
       <S.NoQuiz>
@@ -16,13 +35,28 @@ const Quiz = ({ questions, questNum }) => {
     )
   }
 
-  // TODO: get quiz questions
-  const question = questions[0]
+  const question = questions[id]
+  const length = questions.length
+
+  const onCorrectAnswer = (bool) => {
+    if (id === length - 1) {
+      onQuizComplete()
+      navigate('Quiz Score', {
+        title: titleKey,
+        correct: bool ? numCorrect + 1 : numCorrect,
+      })
+      return
+    }
+
+    if (bool) onCorrectAns(numCorrect + 1)
+    updateQuestionId(id + 1)
+    onViewAnswer(false)
+  }
 
   return (
     <S.Quiz>
       <S.QuestNum>
-        <S.QuestNumText>1</S.QuestNumText>
+        <S.QuestNumText>{id + 1}</S.QuestNumText>
         <S.QuestNumText> of </S.QuestNumText>
         <S.QuestNumText>{questNum}</S.QuestNumText>
       </S.QuestNum>
@@ -30,25 +64,48 @@ const Quiz = ({ questions, questNum }) => {
       <S.Card>{question && <QuizCard question={question} />}</S.Card>
 
       <S.Buttons>
-        <CTA text="Correct" onPress={() => {}} buttonType="success" />
-        <CTA text="Incorrect" onPress={() => {}} buttonType="error" />
+        <CTA
+          text="Correct"
+          onPress={() => onCorrectAnswer(true)}
+          buttonType="success"
+        />
+        <CTA
+          text="Incorrect"
+          onPress={() => onCorrectAnswer(false)}
+          buttonType="error"
+        />
       </S.Buttons>
     </S.Quiz>
   )
 }
 
-const mapStateToProps = ({ decks }) => {
-  // TODO: use route params
-  const title = 'React'
+const mapStateToProps = ({ decks, quiz }, { route }) => {
+  const { title } = route.params
+  const { id, numCorrect } = quiz
+  const key = formatTitleKey(title)
 
-  const deck = decks[title]
+  const deck = decks[key]
   const questNum = deck ? deck.questions.length : null
   const questions = deck ? deck.questions : []
 
   return {
-    questions,
-    questNum,
+    deck: {
+      titleKey: key,
+      questions,
+      questNum,
+    },
+    quiz: {
+      id,
+      numCorrect,
+    },
   }
 }
 
-export default connect(mapStateToProps)(Quiz)
+const mapDispatchToProps = (dispatch) => ({
+  onQuizComplete: () => dispatch(setComplete(true)),
+  updateQuestionId: (id) => dispatch(setId(id)),
+  onCorrectAns: (num) => dispatch(setCorrect(num)),
+  onViewAnswer: (bool) => dispatch(viewAnswer(bool)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz)
