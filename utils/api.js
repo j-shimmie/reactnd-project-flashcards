@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { DECK_STORAGE_KEY, setData } from './_deck'
 import { formatTitleKey } from './helpers'
