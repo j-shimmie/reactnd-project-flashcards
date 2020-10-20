@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { AppLoading } from 'expo'
 
 import S from './Decks.styled'
 import { getDecks } from '../../utils/api'
@@ -9,9 +10,21 @@ import DeckCard from '../deck-card/DeckCard'
 import CTA from '../cta/CTA'
 
 const Decks = ({ decks, onFetchDecks, navigation: { navigate } }) => {
+  const [isReady, setIsReady] = useState(false)
+
   useEffect(() => {
     getDecks().then((decks) => onFetchDecks(decks))
   }, [])
+
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={getDecks}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    )
+  }
 
   const decksWithKey = Object.keys(decks)
     .sort((a, b) => decks[a].timestamp - decks[b].timestamp)
