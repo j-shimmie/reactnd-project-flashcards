@@ -4,13 +4,16 @@ import { connect } from 'react-redux'
 import S from './Quiz.styled'
 import QuizCard from '../quiz-card/QuizCard'
 import CTA from '../cta/CTA'
-import { formatTitleKey } from '../../utils/helpers'
-import { setComplete, setId, setCorrect, viewAnswer } from '../../actions/quiz'
+import {
+  formatTitleKey,
+  clearNotification,
+  setNotification,
+} from '../../utils/helpers'
+import { setId, setCorrect, viewAnswer } from '../../actions/quiz'
 
 const Quiz = ({
   deck,
   quiz,
-  onQuizComplete,
   updateQuestionId,
   onCorrectAns,
   onViewAnswer,
@@ -38,9 +41,10 @@ const Quiz = ({
   const question = questions[id]
   const length = questions.length
 
-  const onCorrectAnswer = (bool) => {
+  const onAnswer = (bool) => {
     if (id === length - 1) {
-      onQuizComplete()
+      clearNotification().then(setNotification)
+
       navigate('Quiz Score', {
         title: titleKey,
         correct: bool ? numCorrect + 1 : numCorrect,
@@ -66,12 +70,12 @@ const Quiz = ({
       <S.Buttons>
         <CTA
           text="Correct"
-          onPress={() => onCorrectAnswer(true)}
+          onPress={() => onAnswer(true)}
           buttonType="success"
         />
         <CTA
           text="Incorrect"
-          onPress={() => onCorrectAnswer(false)}
+          onPress={() => onAnswer(false)}
           buttonType="error"
         />
       </S.Buttons>
@@ -102,7 +106,6 @@ const mapStateToProps = ({ decks, quiz }, { route }) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onQuizComplete: () => dispatch(setComplete(true)),
   updateQuestionId: (id) => dispatch(setId(id)),
   onCorrectAns: (num) => dispatch(setCorrect(num)),
   onViewAnswer: (bool) => dispatch(viewAnswer(bool)),
