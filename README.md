@@ -8,7 +8,7 @@ App has only been tested on iOS devices
 
 To view the project:
 
-- install all project dependencies with `npm install`
+- install all project dependencies with `yarn install`
 - start the project with `expo start`
 
 ## Project Resources
