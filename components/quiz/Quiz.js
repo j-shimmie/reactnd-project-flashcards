@@ -45,7 +45,7 @@ const Quiz = ({
     if (id === length - 1) {
       clearNotification().then(setNotification)
 
-      navigate('Quiz Score', {
+      navigate('Score', {
         title: titleKey,
         correct: bool ? numCorrect + 1 : numCorrect,
       })

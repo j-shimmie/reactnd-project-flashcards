@@ -47,11 +47,15 @@ const Navigation = () => {
 
   return (
     <Navigator>
-      <Screen name="Home" component={Tabs} />
-      <Screen name="Deck Detail" component={DeckDetail} />
+      <Screen name="Home" component={Tabs} options={{ title: '' }} />
+      <Screen
+        name="Deck Detail"
+        component={DeckDetail}
+        options={({ route }) => ({ title: route.params.title })}
+      />
       <Screen name="Add Card" component={AddCard} />
       <Screen name="Quiz" component={Quiz} />
-      <Screen name="Quiz Score" component={QuizScore} />
+      <Screen name="Score" component={QuizScore} />
     </Navigator>
   )
 }
