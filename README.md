@@ -1,4 +1,4 @@
-˚# Mobile Flashcards
+# Mobile Flashcards
 
 This is the project for Udacity's "Mobile Flashcards" project, bootstrapped with [Create React Native App](https://github.com/expo/create-react-native-app).
 
