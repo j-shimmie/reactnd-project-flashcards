@@ -14,4 +14,4 @@ To view the project:
 ## Project Resources
 
 - [UI Kit](https://www.sketchappsources.com/free-source/4510-elearning-app-ui-kit-sketch-freebie-resource.html)
-- [SVG Percent Cirle](https://codepen.io/luchen/pen/jVZxqR)
+- [SVG Percent Circle](https://codepen.io/luchen/pen/jVZxqR)
